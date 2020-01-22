@@ -20,14 +20,15 @@
             android:hint="Type a Message"
             android:layout_weight="10"
             android:layout_width="0dp"
-            android:layout_height="45dp"/>
+            android:minHeight="40dp"
+            android:layout_height="wrap_content"/>
         <Button
             android:onClick="sendMsgBtn"
             android:id="@+id/bSend"
             android:text="Send"
-            android:layout_weight="2"
+            android:layout_weight="2.5"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
