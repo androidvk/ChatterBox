@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.coremacasia.chatterbox.ChatHelper;
 import com.coremacasia.chatterbox.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,14 +39,15 @@ class UserListAdapter extends RecyclerView.Adapter {
         //Offline Data store
 
         CollectionReference ref = db.collection("users");
-        ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        ref.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        UserHelper helper = documentSnapshot.toObject(UserHelper.class);
-                        dataList.add(helper);
-                        notifyDataSetChanged();
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for(DocumentChange documentChange:queryDocumentSnapshots.getDocumentChanges()){
+                    switch (documentChange.getType()) {
+                        case ADDED:
+                            UserHelper helper = documentChange.getDocument().toObject(UserHelper.class);
+                            dataList.add(helper);
+                            notifyItemInserted(dataList.size()-1);
                     }
                 }
             }

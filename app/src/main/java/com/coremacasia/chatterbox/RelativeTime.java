@@ -19,9 +19,7 @@ public class RelativeTime {
         // TODO: localize
         final long diff = now - time;
         if (diff < MINUTE_MILLIS) {
-            return " now";
-        } else if (diff < 2 * MINUTE_MILLIS) {
-            return "m";
+            return "now";
         } else if (diff < 50 * MINUTE_MILLIS) {
             return diff / MINUTE_MILLIS + "m";
         } else if (diff < 90 * MINUTE_MILLIS) {

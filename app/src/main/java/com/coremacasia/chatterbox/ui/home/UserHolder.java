@@ -47,7 +47,7 @@ class UserHolder extends RecyclerView.ViewHolder {
                 .into(iUserImage);
         tUserEmail.setText(userHelper.getEmail());
 
-        if(firebaseUser.getEmail().equals(userHelper.getEmail())){
+        if(firebaseUser.getUid().equals(userHelper.getUserId())){
             click.setVisibility(View.GONE);
         }else click.setVisibility(View.VISIBLE);
 

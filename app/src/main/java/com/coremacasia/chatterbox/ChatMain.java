@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,9 +57,11 @@ private RecyclerView recyclerView;
 
     private void sendMessage(String msg) {
         final Map map=new HashMap();
+
+        map.put("timeStamp", FieldValue.serverTimestamp());
         map.put("textMessage",msg);
         map.put("senderId",ChatList.myUserId);
-        map.put("timeStamp", FieldValue.serverTimestamp());
+        map.put("messageTime",new Date());
 
         DocumentReference myRef=FirebaseFirestore.getInstance().collection("users")
                 .document(ChatList.myUserId).collection("chats").document(userId)

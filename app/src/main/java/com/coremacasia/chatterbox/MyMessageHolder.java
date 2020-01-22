@@ -14,15 +14,17 @@ public class MyMessageHolder extends RecyclerView.ViewHolder {
     public MyMessageHolder(View view) {
         super(view);
         textView = view.findViewById(R.id.listText);
-        tTime=view.findViewById(R.id.time);
+        tTime = view.findViewById(R.id.time);
 
     }
 
     public void start(int position, RecyclerView.ViewHolder holder, List<ChatHelper> dataList) {
-        ChatHelper chatHelper=dataList.get(position);
-        String timeAgo=new RelativeTime().getTimeAgo(chatHelper.getTimeStamp().getTime());
+        ChatHelper chatHelper = dataList.get(position);
+        if(chatHelper.getMessageTime()!=null){
+            String timeAgo = new RelativeTime().getTimeAgo(chatHelper.getMessageTime().getTime());
+            tTime.setText(timeAgo);
+        }
 
-        tTime.setText(timeAgo);
-        textView.setText(dataList.get(position).getTextMessage());
+        textView.setText(chatHelper.getTextMessage());
     }
 }

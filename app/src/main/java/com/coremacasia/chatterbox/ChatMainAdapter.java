@@ -30,6 +30,8 @@ class ChatMainAdapter extends RecyclerView.Adapter {
 
     private List<ChatHelper> dataList = new ArrayList<>();
     private static final String TAG = "ChatMainAdapter";
+    private List<String> contentIds = new ArrayList<>();
+    private ChatHelper helperChanged;
 
     public ChatMainAdapter(Context applicationContext, String userId) {
 
@@ -57,6 +59,21 @@ class ChatMainAdapter extends RecyclerView.Adapter {
                             ChatHelper helper = documentChange.getDocument().toObject(ChatHelper.class);
                             dataList.add(helper);
                             notifyItemInserted(dataList.size() - 1);
+                            contentIds.add(documentChange.getDocument().getId());
+                        break;
+                        case MODIFIED:
+                            helperChanged=documentChange.getDocument().toObject(ChatHelper.class);
+                            String contentKey = documentChange.getDocument().getId();
+                            int contentIndex = contentIds.indexOf(contentKey);
+                            if (contentIndex > -1) {
+                                dataList.set(contentIndex, helperChanged);
+
+                                notifyItemChanged(contentIndex);
+                                //notifyDataSetChanged();
+                            } else {
+                                Log.w(TAG, "onEvent: Modified " + contentKey);
+                            }
+                            break;
                     }
                 }
             }
