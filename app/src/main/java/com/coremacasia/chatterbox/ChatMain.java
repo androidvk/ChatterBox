@@ -45,7 +45,7 @@ private RecyclerView recyclerView;
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        ChatMainAdapter myAdapter=new ChatMainAdapter(getApplicationContext(),userId);
+        ChatMainAdapter myAdapter=new ChatMainAdapter(getApplicationContext(),userId,recyclerView);
         recyclerView.setAdapter(myAdapter);
 
     }
@@ -62,7 +62,8 @@ private RecyclerView recyclerView;
         map.put("textMessage",msg);
         map.put("senderId",ChatList.myUserId);
         map.put("messageTime",new Date());
-
+        eMsg.setText("");
+        //recyclerView.smoothScrollToPosition(ChatMainAdapter.dataList.size());
         DocumentReference myRef=FirebaseFirestore.getInstance().collection("users")
                 .document(ChatList.myUserId).collection("chats").document(userId)
                 .collection("conversation").document();
@@ -75,7 +76,7 @@ private RecyclerView recyclerView;
             @Override
             public void onSuccess(Void aVoid) {
                 hisRef.set(map,SetOptions.merge());
-                eMsg.setText("");
+
             }
         });
 

@@ -33,11 +33,10 @@ class ChatMainAdapter extends RecyclerView.Adapter {
     private List<String> contentIds = new ArrayList<>();
     private ChatHelper helperChanged;
 
-    public ChatMainAdapter(Context applicationContext, String userId) {
+    public ChatMainAdapter(Context applicationContext, String userId, final RecyclerView recyclerView) {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         CollectionReference myRef = db.collection("users")
                 .document(ChatList.myUserId).collection("chats").document(userId)
                 .collection("conversation");
@@ -55,6 +54,7 @@ class ChatMainAdapter extends RecyclerView.Adapter {
                             dataList.add(helper);
                             notifyItemInserted(dataList.size() - 1);
                             contentIds.add(documentChange.getDocument().getId());
+                            recyclerView.smoothScrollToPosition(dataList.size());
                         break;
                         case MODIFIED:
                             helperChanged=documentChange.getDocument().toObject(ChatHelper.class);
@@ -133,4 +133,9 @@ class ChatMainAdapter extends RecyclerView.Adapter {
             return 2;
         }
     }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
 }

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginRight="150dp"
+            android:layout_marginEnd="150dp"
             android:layout_alignParentLeft="true"
             android:layout_margin="4dp"
             android:background="@drawable/messagebox_rectangle"
@@ -20,7 +20,8 @@
             android:layout_below="@+id/listText2"
             android:textSize="14sp"
             android:textColor="#383838"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
