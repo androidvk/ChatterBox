@@ -35,13 +35,8 @@ class ChatMainAdapter extends RecyclerView.Adapter {
 
     public ChatMainAdapter(Context applicationContext, String userId) {
 
-        //Offline Data store
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
-                .build();
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.setFirestoreSettings(settings);
-        //Offline Data store
 
         CollectionReference myRef = db.collection("users")
                 .document(ChatList.myUserId).collection("chats").document(userId)

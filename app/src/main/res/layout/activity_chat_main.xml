@@ -15,12 +15,14 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:inputType="textCapSentences|textMultiLine"
              android:background="@android:color/white"
             android:id="@+id/eMsg"
             android:hint="Type a Message"
             android:layout_weight="10"
+            android:padding="2dp"
             android:layout_width="0dp"
-            android:minHeight="40dp"
+            android:minHeight="45dp"
             android:layout_height="wrap_content"/>
         <Button
             android:onClick="sendMsgBtn"

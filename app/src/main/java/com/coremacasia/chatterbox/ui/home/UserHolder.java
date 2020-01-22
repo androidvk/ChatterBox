@@ -1,6 +1,7 @@
 package com.coremacasia.chatterbox.ui.home;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ class UserHolder extends RecyclerView.ViewHolder {
     private CircleImageView iUserImage;
     private View click;
     private FirebaseUser firebaseUser;
+    private static final String TAG = "UserHolder";
     public UserHolder(View itemView) {
         super(itemView);
         iUserImage=itemView.findViewById(R.id.userImg);

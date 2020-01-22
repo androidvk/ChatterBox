@@ -1,5 +1,6 @@
 package com.coremacasia.chatterbox.ui.home;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +29,11 @@ import java.util.List;
 
 class UserListAdapter extends RecyclerView.Adapter {
     List<UserHelper> dataList = new ArrayList<>();
-
+    private static final String TAG = "UserListAdapter";
     public UserListAdapter(FragmentActivity activity) {
         //Offline Data store
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
+                .setPersistenceEnabled(false)
                 .build();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.setFirestoreSettings(settings);
@@ -75,5 +76,12 @@ class UserListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+       // UserHelper userHelper=dataList.get(position);
+        //Log.e(TAG, "getItemViewType: Email: "+userHelper.getEmail());
+        return super.getItemViewType(position);
     }
 }
